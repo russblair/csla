@@ -137,22 +137,52 @@ namespace Csla.Web.Mvc
     {
       try
       {
-        var value = bindingContext.ActionContext.HttpContext.Request.Form[index].FirstOrDefault();
-        if (!string.IsNullOrWhiteSpace(value))
+        var formContainsKey = bindingContext.ActionContext.HttpContext.Request.Form.ContainsKey(index);
+        if (formContainsKey)
         {
-          try
+          var value = bindingContext.ActionContext.HttpContext.Request.Form[index].FirstOrDefault();
+          if (!string.IsNullOrWhiteSpace(value))
           {
-            if (item.Type.Equals(typeof(string)))
-              Reflection.MethodCaller.CallPropertySetter(result, item.Name, value);
-            else
-              Reflection.MethodCaller.CallPropertySetter(result, item.Name, Utilities.CoerceValue(item.Type, value.GetType(), null, value));
+            try
+            {
+              if (item.Type.Equals(typeof(string)))
+                Reflection.MethodCaller.CallPropertySetter(result, item.Name, value);
+              else
+                Reflection.MethodCaller.CallPropertySetter(result, item.Name, Utilities.CoerceValue(item.Type, value.GetType(), null, value));
+            }
+            catch
+            {
+              if (item.Type.Equals(typeof(string)))
+                LoadProperty(result, item, value);
+              else
+                LoadProperty(result, item, Utilities.CoerceValue(item.Type, value.GetType(), null, value));
+            }
           }
-          catch
+          else    // value is null or blank
           {
-            if (item.Type.Equals(typeof(string)))
-              LoadProperty(result, item, value);
-            else
-              LoadProperty(result, item, Utilities.CoerceValue(item.Type, value.GetType(), null, value));
+            var itemValue = Csla.Reflection.MethodCaller.CallPropertyGetter(result, item.Name);
+            if (!string.IsNullOrWhiteSpace(itemValue?.ToString()))
+            {
+              bool isNullable = Nullable.GetUnderlyingType(item.Type) != null;
+              try
+              {
+                if (item.Type.Equals(typeof(string)))
+                  Reflection.MethodCaller.CallPropertySetter(result, item.Name, value);
+                else if (isNullable)
+                  Reflection.MethodCaller.CallPropertySetter(result, item.Name, null);
+                else
+                  Reflection.MethodCaller.CallPropertySetter(result, item.Name, Utilities.CoerceValue(item.Type, value.GetType(), null, value));
+              }
+              catch
+              {
+                if (item.Type.Equals(typeof(string)))
+                  LoadProperty(result, item, value);
+                else if (isNullable)
+                  LoadProperty(result, item, null);
+                else
+                  LoadProperty(result, item, Utilities.CoerceValue(item.Type, value.GetType(), null, value));
+              }
+            }
           }
         }
       }
