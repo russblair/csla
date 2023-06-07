@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -16,6 +17,7 @@ builder.Services.AddHttpClient("BlazorWasmSecureExample.ServerAPI", client => cl
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("BlazorWasmSecureExample.ServerAPI"));
 
 //builder.Services.AddApiAuthorization();
+//builder.Services.AddRemoteAuthentication<object, object>();
 
 builder.Services.AddScoped<AuthenticationStateProvider, TestAuthStateProvider>();
 

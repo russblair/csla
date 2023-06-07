@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using BlazorWasmSecureExample.Server.Data;
 using BlazorWasmSecureExample.Server.Models;
 using Microsoft.AspNetCore.Authentication;
@@ -5,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,12 +14,16 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
-
-builder.Services.AddIdentityCore<ApplicationUser>();
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(
+  options => {
+    options.SignIn.RequireConfirmedAccount = false;
+    options.User.RequireUniqueEmail = false;
+    options.SignIn.RequireConfirmedEmail = false;
+  })
+  .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
