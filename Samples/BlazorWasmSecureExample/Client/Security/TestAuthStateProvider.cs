@@ -2,21 +2,33 @@
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
- 
+
 namespace BlazorWasmSecureExample.Client.Security
 {
   public class TestAuthStateProvider : AuthenticationStateProvider
   {
-    public async override Task<AuthenticationState> GetAuthenticationStateAsync()
+    private readonly HttpClient _httpClient;
+
+    public TestAuthStateProvider(HttpClient httpClient)
     {
-      await Task.Delay(1500);
-      var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, "John Doe"),
-                new Claim(ClaimTypes.Role, "Administrator")
-            };
-      var anonymous = new ClaimsIdentity();
-      return await Task.FromResult(new AuthenticationState(new ClaimsPrincipal(anonymous)));
+      _httpClient = httpClient;
+    }
+
+    public override async Task<AuthenticationState> GetAuthenticationStateAsync()
+    {
+      var response = await _httpClient.GetAsync("/security/");
+      var isAuthenticated = await response.Content.ReadAsStringAsync();
+      var principal = bool.Parse(isAuthenticated) ? new ClaimsPrincipal(GetClaimsIdentity()) : new ClaimsPrincipal(new ClaimsIdentity());
+      return new AuthenticationState(principal);
+    }
+
+
+    private static ClaimsIdentity GetClaimsIdentity()
+    {
+      var claims = new List<Claim> { new Claim(ClaimTypes.Name, "Test") };
+
+      // To have IsAuthenticated set to true, you need to specify an authentication type in the ctor
+      return new ClaimsIdentity(claims, "Custom");
     }
   }
 }

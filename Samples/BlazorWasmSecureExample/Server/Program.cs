@@ -13,7 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    //options.UseSqlite(connectionString));
+    options.UseInMemoryDatabase(connectionString));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -23,7 +24,9 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(
     options.User.RequireUniqueEmail = false;
     options.SignIn.RequireConfirmedEmail = false;
   })
-  .AddEntityFrameworkStores<ApplicationDbContext>();
+  .AddEntityFrameworkStores<ApplicationDbContext>()
+  .AddDefaultUI()
+  .AddDefaultTokenProviders();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>

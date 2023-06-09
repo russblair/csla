@@ -17,7 +17,7 @@ namespace BlazorWasmSecureExample.Server.Data.Migrations
     {
 #pragma warning disable 612, 618
       modelBuilder
-          .UseIdentityColumns()
+          //.UseIdentityColumns()
           .HasAnnotation("Relational:MaxIdentifierLength", 128)
           .HasAnnotation("ProductVersion", "5.0.0-rc.1.20417.2");
 
@@ -261,8 +261,8 @@ namespace BlazorWasmSecureExample.Server.Data.Migrations
           {
             b.Property<int>("Id")
                       .ValueGeneratedOnAdd()
-                      .HasColumnType("int")
-                      .UseIdentityColumn();
+                      .HasColumnType("int");
+                      //.UseIdentityColumn();
 
             b.Property<string>("ClaimType")
                       .HasColumnType("nvarchar(max)");
@@ -285,8 +285,8 @@ namespace BlazorWasmSecureExample.Server.Data.Migrations
           {
             b.Property<int>("Id")
                       .ValueGeneratedOnAdd()
-                      .HasColumnType("int")
-                      .UseIdentityColumn();
+                      .HasColumnType("int");
+                      //.UseIdentityColumn();
 
             b.Property<string>("ClaimType")
                       .HasColumnType("nvarchar(max)");

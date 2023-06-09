@@ -4,18 +4,18 @@
 
 <AuthorizeView>
     <Authorized>
-        <a href="account/profile">Hello, @context.User.Identity?.Name!</a>
+        <a href="identity/account/profile">Hello, @context.User.Identity?.Name!</a>
         <button class="nav-link btn btn-link" @onclick="BeginLogOut">Log out</button>
     </Authorized>
     <NotAuthorized>
-        <a href="account/register">Register</a>
-        <a href="account/login">Log in</a>
+        <a href="identity/account/register">Register</a>
+        <a href="identity/account/login">Log in</a>
     </NotAuthorized>
 </AuthorizeView>
 
 @code{
     private void BeginLogOut()
     {
-        Navigation.NavigateToLogout("account/logout");
+        Navigation.NavigateToLogout("identity/account/logout");
     }
 }
