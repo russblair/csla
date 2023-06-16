@@ -1,5 +1,6 @@
 using BlazorWasmSecureExample.Client;
 using BlazorWasmSecureExample.Client.Security;
+using Csla.Configuration;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
@@ -25,10 +26,9 @@ builder.Services.AddScoped<AuthenticationStateProvider, TestAuthStateProvider>()
 builder.Services.AddAuthorizationCore();
 builder.Services.AddOptions();
 
-//builder.Services.AddCsla(o => o
-//  .AddBlazorWebAssembly()
-//  .DataPortal(dpo => dpo
-//    .EnableSecurityPrincipalFlowFromClient()
-//    .UseHttpProxy(options => options.DataPortalUrl = "/api/DataPortal")));
+builder.Services.AddCsla(o => o
+  .AddBlazorWebAssembly()
+  .DataPortal(dpo => dpo
+    .UseHttpProxy(options => options.DataPortalUrl = "/api/DataPortal")));
 
 await builder.Build().RunAsync();

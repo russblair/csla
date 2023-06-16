@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
+using Csla.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,6 +39,13 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+
+builder.Services.AddHttpContextAccessor(); 
+builder.Services.AddCsla(o => o
+  .AddAspNetCore()
+  .DataPortal(dpo => dpo
+    .AddServerSideDataPortal()
+    .UseLocalProxy()));
 
 var app = builder.Build();
 
