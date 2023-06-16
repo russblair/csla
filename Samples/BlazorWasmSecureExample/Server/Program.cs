@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
 using Csla.Configuration;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,6 +47,14 @@ builder.Services.AddCsla(o => o
   .DataPortal(dpo => dpo
     .AddServerSideDataPortal()
     .UseLocalProxy()));
+
+// for Mock Db
+builder.Services.AddTransient(typeof(DataAccess.IPersonDal), typeof(DataAccess.Mock.PersonDal));
+
+// If using Kestrel:
+builder.Services.Configure<KestrelServerOptions>(options => { options.AllowSynchronousIO = true; });
+// If using IIS:
+builder.Services.Configure<IISServerOptions>(options => { options.AllowSynchronousIO = true; });
 
 var app = builder.Build();
 

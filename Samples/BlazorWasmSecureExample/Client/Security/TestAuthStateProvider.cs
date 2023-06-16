@@ -25,7 +25,11 @@ namespace BlazorWasmSecureExample.Client.Security
 
     private static ClaimsIdentity GetClaimsIdentity()
     {
-      var claims = new List<Claim> { new Claim(ClaimTypes.Name, "Test") };
+      var claims = new List<Claim> 
+      { 
+        new Claim(ClaimTypes.Name, "Test"),
+        new Claim(ClaimTypes.Role, "Admin")
+      };
 
       // To have IsAuthenticated set to true, you need to specify an authentication type in the ctor
       return new ClaimsIdentity(claims, "Custom");

@@ -1,4 +1,4 @@
-using BlazorWasmSecureExample.Shared;
+using BlazorExample.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

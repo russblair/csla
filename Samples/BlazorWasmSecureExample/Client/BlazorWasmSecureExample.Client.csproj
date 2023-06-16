@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Shared\BlazorWasmSecureExample.Shared.csproj" />
+    <ProjectReference Include="..\..\BlazorExample\BlazorExample\Shared\BlazorExample.Shared.csproj" />
   </ItemGroup>
 
 </Project>

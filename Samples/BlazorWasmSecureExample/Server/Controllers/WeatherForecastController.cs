@@ -1,4 +1,4 @@
-using BlazorWasmSecureExample.Shared;
+using BlazorExample.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,7 +26,7 @@ namespace BlazorWasmSecureExample.Server.Controllers
     {
       return Enumerable.Range(1, 5).Select(index => new WeatherForecast
       {
-        Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+        Date = DateTime.Now.AddDays(index),
         TemperatureC = Random.Shared.Next(-20, 55),
         Summary = Summaries[Random.Shared.Next(Summaries.Length)]
       })
