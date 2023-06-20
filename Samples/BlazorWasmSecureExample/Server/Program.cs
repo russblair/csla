@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
 using Csla.Configuration;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using BlazorWasmSecureExample.Server.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -63,6 +64,7 @@ if (app.Environment.IsDevelopment())
 {
   app.UseMigrationsEndPoint();
   app.UseWebAssemblyDebugging();
+  app.AddDevelopmentSecurityData().Wait();
 }
 else
 {
