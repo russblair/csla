@@ -1,6 +1,4 @@
 ﻿using BlazorWasmSecureExample.Shared;
-using Csla.Rules.CommonRules;
-using Csla;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http.Json;
 using System.Security.Claims;
@@ -47,10 +45,11 @@ namespace BlazorWasmSecureExample.Client.Security
       {
         _logger.LogError(ex, "Failed to retrieve Claims from server! Message: {Message}", ex.Message);
       }
-      var principal = new CslaClaimsPrincipal(new ClaimsPrincipal(identity ?? new ClaimsIdentity()));
-      var isinRole = principal.IsInRole("Admin");
 
+      var principal = new CslaClaimsPrincipal(new ClaimsPrincipal(identity ?? new ClaimsIdentity()));
       var authenticationState = new AuthenticationState(principal);
+
+      // Notify the Blazor framework (and Csla) that the principal has changed
       NotifyAuthenticationStateChanged(Task.FromResult(authenticationState));
 
       return authenticationState;
