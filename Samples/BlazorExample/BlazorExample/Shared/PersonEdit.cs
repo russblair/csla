@@ -36,12 +36,12 @@ namespace BlazorExample.Shared
     [ObjectAuthorizationRules]
     public static void AddObjectAuthorizationRules()
     {
-      Csla.Rules.BusinessRules.AddRule(typeof(PersonEdit),
-        new Csla.Rules.CommonRules.IsInRole(Csla.Rules.AuthorizationActions.CreateObject, "Admin"));
-      Csla.Rules.BusinessRules.AddRule(typeof(PersonEdit),
-        new Csla.Rules.CommonRules.IsInRole(Csla.Rules.AuthorizationActions.EditObject, "Admin"));
-      Csla.Rules.BusinessRules.AddRule(typeof(PersonEdit),
-        new Csla.Rules.CommonRules.IsInRole(Csla.Rules.AuthorizationActions.DeleteObject, "Admin"));
+      //Csla.Rules.BusinessRules.AddRule(typeof(PersonEdit),
+      //  new Csla.Rules.CommonRules.IsInRole(Csla.Rules.AuthorizationActions.CreateObject, "Admin"));
+      //Csla.Rules.BusinessRules.AddRule(typeof(PersonEdit),
+      //  new Csla.Rules.CommonRules.IsInRole(Csla.Rules.AuthorizationActions.EditObject, "Admin"));
+      //Csla.Rules.BusinessRules.AddRule(typeof(PersonEdit),
+      //  new Csla.Rules.CommonRules.IsInRole(Csla.Rules.AuthorizationActions.DeleteObject, "Admin"));
     }
 
     protected override void AddBusinessRules()

@@ -11,16 +11,16 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-builder.Services.AddHttpClient("BlazorWasmSecureExample.ServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
+builder.Services.AddHttpClient("BlazorWasmSecureExample.Server", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
     //.AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
 // Supply HttpClient instances that include access tokens when making requests to the server project
-builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("BlazorWasmSecureExample.ServerAPI"));
+builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("BlazorWasmSecureExample.Server"));
 
 //builder.Services.AddApiAuthorization();
 //builder.Services.AddRemoteAuthentication<object, object>();
 
-builder.Services.AddScoped<AuthenticationStateProvider, TestAuthStateProvider>();
+builder.Services.AddScoped<AuthenticationStateProvider, CookieAuthStateProvider>();
 
 //// configure CSLA Authentication and authorization
 builder.Services.AddAuthorizationCore();

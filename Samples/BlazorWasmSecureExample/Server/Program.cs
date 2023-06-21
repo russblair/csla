@@ -64,7 +64,7 @@ if (app.Environment.IsDevelopment())
 {
   app.UseMigrationsEndPoint();
   app.UseWebAssemblyDebugging();
-  app.AddDevelopmentSecurityData().Wait();
+  await app.AddDevelopmentSecurityDataAsync();
 }
 else
 {

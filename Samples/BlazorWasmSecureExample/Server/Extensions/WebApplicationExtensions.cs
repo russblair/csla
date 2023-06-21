@@ -5,7 +5,7 @@ namespace BlazorWasmSecureExample.Server.Extensions
 {
   internal static class WebApplicationExtensions
   {
-    internal static async Task<WebApplication> AddDevelopmentSecurityData(this WebApplication webApplication)
+    internal static async Task<WebApplication> AddDevelopmentSecurityDataAsync(this WebApplication webApplication)
     {
       await CreateAdminUser(webApplication);
 
