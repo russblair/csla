@@ -10,6 +10,7 @@ namespace BlazorWasmSecureExample.Client.Security
   {
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly ILogger<CookieAuthStateProvider> _logger;
+    private ClaimsPrincipal? _claimsPrincipal;
 
     public CookieAuthStateProvider(IHttpClientFactory httpClientFactory, ILogger<CookieAuthStateProvider> logger)
     {
@@ -21,6 +22,11 @@ namespace BlazorWasmSecureExample.Client.Security
     {
       IEnumerable<SerializableClaim>? claims = null;
       ClaimsIdentity? identity = null;
+
+      if (_claimsPrincipal is not null)
+      {
+        return new AuthenticationState(_claimsPrincipal);
+      }
 
       // Retrieve the claims principal from the server
       var httpClient = _httpClientFactory.CreateClient("BlazorWasmSecureExample.Server");
@@ -46,8 +52,8 @@ namespace BlazorWasmSecureExample.Client.Security
         _logger.LogError(ex, "Failed to retrieve Claims from server! Message: {Message}", ex.Message);
       }
 
-      var principal = new CslaClaimsPrincipal(new ClaimsPrincipal(identity ?? new ClaimsIdentity()));
-      var authenticationState = new AuthenticationState(principal);
+      _claimsPrincipal = new CslaClaimsPrincipal(new ClaimsPrincipal(identity ?? new ClaimsIdentity()));
+      var authenticationState = new AuthenticationState(_claimsPrincipal);
 
       // Notify the Blazor framework (and Csla) that the principal has changed
       NotifyAuthenticationStateChanged(Task.FromResult(authenticationState));
