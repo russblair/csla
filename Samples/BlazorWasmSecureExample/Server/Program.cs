@@ -33,7 +33,7 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-      options.Cookie.Name = "CslaSecurity";
+      options.Cookie.Name = "CookieSecurity";
       options.ExpireTimeSpan = TimeSpan.FromMinutes(2);
       options.SlidingExpiration = true;
       options.AccessDeniedPath = "/Forbidden/";
