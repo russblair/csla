@@ -28,13 +28,13 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(
     options.SignIn.RequireConfirmedEmail = false;
   })
   .AddEntityFrameworkStores<ApplicationDbContext>()
-  .AddDefaultUI()
-  .AddDefaultTokenProviders();
+  .AddDefaultUI();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-      options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+      options.Cookie.Name = "CslaSecurity";
+      options.ExpireTimeSpan = TimeSpan.FromMinutes(2);
       options.SlidingExpiration = true;
       options.AccessDeniedPath = "/Forbidden/";
     });
