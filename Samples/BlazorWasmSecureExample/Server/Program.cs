@@ -30,14 +30,16 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(
   .AddEntityFrameworkStores<ApplicationDbContext>()
   .AddDefaultUI();
 
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
-    {
-      options.Cookie.Name = "CookieSecurity";
-      options.ExpireTimeSpan = TimeSpan.FromMinutes(2);
-      options.SlidingExpiration = true;
-      options.AccessDeniedPath = "/Forbidden/";
-    });
+builder.Services.ConfigureApplicationCookie(options =>
+  {
+    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+    options.Cookie.Name = "LoginCookie";
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(2);
+    options.LoginPath = "/Identity/Account/Login";
+    options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+    options.SlidingExpiration = true;
+  });
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
