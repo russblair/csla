@@ -153,8 +153,6 @@ namespace Csla.Test.AppContext
       Assert.AreEqual(false, root.IsDeleted, "Object should not be deleted");
       Assert.AreEqual(false, root.IsDirty, "Object should not be dirty");
 
-      //TODO: Is there a modern equivalent of this?
-      //Assert.AreEqual("client context data", Csla.ApplicationContext.ClientContext["clientcontext"], "Client context data lost");
       Assert.AreEqual("client context data", TestResults.GetResult("clientcontext"), "Global context data lost");
       Assert.AreEqual("new global value", TestResults.GetResult("globalcontext"), "New global value lost");
     }

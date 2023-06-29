@@ -97,20 +97,20 @@ namespace Csla.Test.Basic
 
       TestResults.AddOrOverwrite("globalcontext", "new global value");
 
-      TestResults.Add("Root", "Inserted");
+      TestResults.AddOrOverwrite("Root", "Inserted");
     }
 
     [Update]
 	protected void DataPortal_Update()
     {
       //we would update here
-      TestResults.Add("Root", "Updated");
+      TestResults.AddOrOverwrite("Root", "Updated");
     }
 
     [DeleteSelf]
     protected void DataPortal_DeleteSelf()
     {
-      TestResults.Add("Root", "Deleted self");
+      TestResults.AddOrOverwrite("Root", "Deleted self");
     }
 
     [Delete]
@@ -126,12 +126,12 @@ namespace Csla.Test.Basic
 
     protected override void DataPortal_OnDataPortalInvoke(DataPortalEventArgs e)
     {
-      TestResults.Add("dpinvoke", TestResults.GetResult("global"));
+      TestResults.Add($"dpinvoke_{e.Operation}", TestResults.GetResult("global"));
     }
 
     protected override void DataPortal_OnDataPortalInvokeComplete(DataPortalEventArgs e)
     {
-      TestResults.Add("dpinvokecomplete", TestResults.GetResult("global"));
+      TestResults.Add($"dpinvokecomplete_{e.Operation}", TestResults.GetResult("global"));
     }
 
   }
