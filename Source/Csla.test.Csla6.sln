@@ -63,14 +63,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Csla.Tests", "Csla.test\Csla.Tests.csproj", "{067B8ABE-8A76-436C-AA39-6F08107D6B42}"
 EndProject
 Global
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Csla.Xaml.Shared\Csla.Xaml.Shared.projitems*{182ac936-b5af-4b1e-a9d5-5dacad90ec1f}*SharedItemsImports = 5
-		Csla.Xaml.Shared\Csla.Xaml.Shared.projitems*{3698d49c-25b5-4f46-bde2-14008231e68d}*SharedItemsImports = 13
-		Csla.Web.Mvc.Shared\Csla.Web.Mvc.Shared.projitems*{9d8a32e2-e82e-425c-a8ea-ac2bc17cca0d}*SharedItemsImports = 5
-		Csla.Web.Mvc.Shared\Csla.Web.Mvc.Shared.projitems*{bb7a0db4-f7f4-4632-b6ae-1edcdd758f16}*SharedItemsImports = 13
-		Csla.Web.Mvc.Shared\Csla.Web.Mvc.Shared.projitems*{e7595821-3078-4993-a657-dd502ead389f}*SharedItemsImports = 5
-		Csla.Xaml.Shared\Csla.Xaml.Shared.projitems*{ff492da9-7c8a-4f0c-a12f-7d346564aad4}*SharedItemsImports = 5
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
@@ -1001,6 +993,14 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {46D05EF4-18C0-4E24-A0A3-A11C7FFFFBBA}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Csla.Xaml.Shared\Csla.Xaml.Shared.projitems*{182ac936-b5af-4b1e-a9d5-5dacad90ec1f}*SharedItemsImports = 5
+		Csla.Xaml.Shared\Csla.Xaml.Shared.projitems*{3698d49c-25b5-4f46-bde2-14008231e68d}*SharedItemsImports = 13
+		Csla.Web.Mvc.Shared\Csla.Web.Mvc.Shared.projitems*{9d8a32e2-e82e-425c-a8ea-ac2bc17cca0d}*SharedItemsImports = 5
+		Csla.Web.Mvc.Shared\Csla.Web.Mvc.Shared.projitems*{bb7a0db4-f7f4-4632-b6ae-1edcdd758f16}*SharedItemsImports = 13
+		Csla.Web.Mvc.Shared\Csla.Web.Mvc.Shared.projitems*{e7595821-3078-4993-a657-dd502ead389f}*SharedItemsImports = 5
+		Csla.Xaml.Shared\Csla.Xaml.Shared.projitems*{ff492da9-7c8a-4f0c-a12f-7d346564aad4}*SharedItemsImports = 5
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = csla.test.vsmdi
